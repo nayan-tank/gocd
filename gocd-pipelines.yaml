@@ -1,0 +1,63 @@
+environments:
+  production:
+    pipelines:
+      - my_pipeline
+    environment_variables:
+      APP_ENV: production
+
+pipelines:
+  my_pipeline:
+    group: default
+    label_template: '${COUNT}'
+    lock_behavior: none
+    materials:
+      git_repo:
+        type: git
+        url: https://github.com/myorg/myrepo.git
+        branch: master
+        destination: myrepo
+    stages:
+      - name: build
+        clean_workspace: true
+        jobs:
+          - name: build_job
+            resources:
+              - linux
+            tasks:
+              - exec:
+                  command: echo
+                  arguments:
+                    - 'Building the project'
+              - exec:
+                  command: ./build.sh
+                  working_directory: myrepo
+      - name: test
+        clean_workspace: true
+        jobs:
+          - name: test_job
+            resources:
+              - linux
+            tasks:
+              - exec:
+                  command: echo
+                  arguments:
+                    - 'Running tests'
+              - exec:
+                  command: ./run_tests.sh
+                  working_directory: myrepo
+      - name: deploy
+        clean_workspace: true
+        environment_variables:
+          DEPLOY_ENV: production
+        jobs:
+          - name: deploy_job
+            resources:
+              - docker
+            tasks:
+              - exec:
+                  command: echo
+                  arguments:
+                    - 'Deploying the application'
+              - exec:
+                  command: ./deploy.sh
+                  working_directory: myrepo
