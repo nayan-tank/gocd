@@ -1,11 +1,11 @@
 pipelines:
   create_file_pipeline:
-    group: defaultGroup
+    group: example_group
     label_template: "${COUNT}"
     materials:
-      - git:
-          url: https://github.com/nayan-tank/gocd.git
-          branch: main
+      git:
+        url: https://github.com/nayan-tank/gocd.git
+        branch: main
     stages:
       - name: create_file_stage
         jobs:
@@ -18,4 +18,4 @@ pipelines:
                   arguments:
                     - -Command
                     - |
-                      New-Item -Path C:\temp\example.txt -ItemType File -Force
+                      New-Item -Path C:\\temp\\example.txt -ItemType File -Force
