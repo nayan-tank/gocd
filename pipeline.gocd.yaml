@@ -11,11 +11,11 @@ pipelines:
         jobs:
           - name: create_directory_job
             resources:
-              - linux
+              - windows
             tasks:
               - exec:
-                  command: bash
+                  command: powershell
                   arguments:
                     - -c
                     - |
-                      mkdir -p /tmp/example_dir
+                      New-Item -Path C:\\temp\\example_dir -ItemType Directory -Force
