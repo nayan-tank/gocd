@@ -1,6 +1,6 @@
 pipelines:
   create_file_pipeline:
-    group: example_group
+    group: defaultGroup
     label_template: "${COUNT}"
     materials:
       git:
@@ -9,13 +9,13 @@ pipelines:
     stages:
       - name: create_file_stage
         jobs:
-          - name: create_file_job
-            resources:
-              - windows
-            tasks:
-              - exec:
-                  command: powershell
-                  arguments:
-                    - -Command
-                    - |
-                      New-Item -Path C:\\temp\\example.txt -ItemType File -Force
+          name: create_file_job
+          resources:
+            - windows
+          tasks:
+            - exec:
+                command: powershell
+                arguments:
+                  - -Command
+                  - |
+                    New-Item -Path C:\\temp\\example.txt -ItemType File -Force
