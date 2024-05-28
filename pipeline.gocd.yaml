@@ -1,6 +1,6 @@
 pipelines:
   create_directory_pipeline:
-    group: example_group
+    group: defaultGroup
     label_template: "${COUNT}"
     materials:
       git:
