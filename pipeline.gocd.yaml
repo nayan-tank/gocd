@@ -17,4 +17,4 @@ pipelines:
                   command: mkdir
                   arguments:
                     - -p
-                    - /home/linux/new-directory
+                    - /home/go/new-directory
